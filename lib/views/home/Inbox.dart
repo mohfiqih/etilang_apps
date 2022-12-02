@@ -31,10 +31,12 @@ class _ChatBubbleState extends State<ChatBubble> {
   final TextEditingController _txtController = TextEditingController();
   void getChatbotReply(String userReply) async {
     _txtController.clear();
-    var response = await http.get(Uri.parse(
-        "http://api.brainshop.ai/get?bid=167355&key=CbtBJcCmY96vzXjL&uid=[Aishwarya pulluri]&msg=[$userReply]"));
-    var data = jsonDecode(response.body);
-    var botReply = data["cnt"];
+    var response =
+        await http.get(Uri.parse("http://127.0.0.1:5000/get?msg=[$userReply]"));
+
+    var data = json.decode(response.body) as Map<String, dynamic>;
+
+    var botReply = data["msg"];
     Message msg = Message(
       text: botReply,
       name: "E-Bot",

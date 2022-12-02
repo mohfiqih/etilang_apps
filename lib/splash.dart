@@ -1,3 +1,5 @@
+import 'package:etilang_apps/dashboard.dart';
+import 'package:etilang_apps/views/auth/welcome.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 // import 'package:etilang_apps/views/auth/welcome.dart';
@@ -22,7 +24,7 @@ class _Splash extends State<Splash> {
     return Timer(duration, () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) {
-          return OnboardingScreen();
+          return WelcomePage();
         }),
       );
     });
