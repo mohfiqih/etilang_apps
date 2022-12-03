@@ -1,4 +1,8 @@
 import 'package:etilang_apps/dashboard.dart';
+import 'package:etilang_apps/views/home/History.dart';
+import 'package:etilang_apps/views/home/Inbox.dart';
+import 'package:etilang_apps/views/home/Kamera.dart';
+import 'package:etilang_apps/views/home/Profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:etilang_apps/config/size_config.dart';
@@ -33,56 +37,60 @@ class SideMenu extends StatelessWidget {
                 ),
               ),
               IconButton(
-                  iconSize: 20,
+                  iconSize: 27,
                   padding: EdgeInsets.symmetric(vertical: 20.0),
-                  icon: SvgPicture.asset(
-                    'assets/home.svg',
-                    color: AppColors.iconGray,
+                  icon: Icon(
+                    Icons.home_outlined,
+                    color: Colors.black,
                   ),
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Dashboard()));
                   }),
               IconButton(
-                  iconSize: 20,
+                  iconSize: 25,
                   padding: EdgeInsets.symmetric(vertical: 20.0),
-                  icon: SvgPicture.asset(
-                    'assets/pie-chart.svg',
-                    color: AppColors.iconGray,
+                  icon: Icon(
+                    Icons.inventory_outlined,
+                    color: Colors.black,
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => History()));
+                  }),
               IconButton(
-                  iconSize: 20,
+                  iconSize: 25,
                   padding: EdgeInsets.symmetric(vertical: 20.0),
-                  icon: SvgPicture.asset(
-                    'assets/clipboard.svg',
-                    color: AppColors.iconGray,
+                  icon: Icon(
+                    Icons.camera_alt_outlined,
+                    color: Colors.black,
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Kamera()));
+                  }),
               IconButton(
-                  iconSize: 20,
+                  iconSize: 25,
                   padding: EdgeInsets.symmetric(vertical: 20.0),
-                  icon: SvgPicture.asset(
-                    'assets/credit-card.svg',
-                    color: AppColors.iconGray,
+                  icon: Icon(
+                    Icons.chat_bubble_outline,
+                    color: Colors.black,
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ChatBubble()));
+                  }),
               IconButton(
-                  iconSize: 20,
+                  iconSize: 25,
                   padding: EdgeInsets.symmetric(vertical: 20.0),
-                  icon: SvgPicture.asset(
-                    'assets/trophy.svg',
-                    color: AppColors.iconGray,
+                  icon: Icon(
+                    Icons.person_pin,
+                    color: Colors.black,
                   ),
-                  onPressed: () {}),
-              IconButton(
-                  iconSize: 20,
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
-                  icon: SvgPicture.asset(
-                    'assets/invoice.svg',
-                    color: AppColors.iconGray,
-                  ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Profil()));
+                  }),
             ],
           ),
         ),

@@ -16,6 +16,7 @@ class AppBarActionItems extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         IconButton(
+            iconSize: 25,
             icon: Icon(
               Icons.home_outlined,
               color: Colors.black,
@@ -26,6 +27,7 @@ class AppBarActionItems extends StatelessWidget {
             }),
         SizedBox(width: 15),
         IconButton(
+            iconSize: 22,
             icon: Icon(
               Icons.chat_outlined,
               color: Colors.black,
@@ -36,8 +38,9 @@ class AppBarActionItems extends StatelessWidget {
             }),
         SizedBox(width: 15),
         IconButton(
+            iconSize: 25,
             icon: Icon(
-              Icons.person_outline,
+              Icons.person_pin,
               color: Colors.black,
             ),
             onPressed: () {
