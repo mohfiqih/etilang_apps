@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -31,12 +32,13 @@ class _ChatBubbleState extends State<ChatBubble> {
   final TextEditingController _txtController = TextEditingController();
   void getChatbotReply(String userReply) async {
     _txtController.clear();
+
     var response =
         await http.get(Uri.parse("http://127.0.0.1:5000/get?msg=[$userReply]"));
 
-    var data = json.decode(response.body) as Map<String, dynamic>;
-
+    var data = jsonDecode(response.body);
     var botReply = data["msg"];
+
     Message msg = Message(
       text: botReply,
       name: "E-Bot",
