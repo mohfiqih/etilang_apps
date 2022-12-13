@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:etilang_apps/config/size_config.dart';
 import 'package:etilang_apps/style/colors.dart';
+import 'package:etilang_apps/views/home/upload.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
@@ -90,6 +91,17 @@ class SideMenu extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Profil()));
+                  }),
+              IconButton(
+                  iconSize: 25,
+                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                  icon: Icon(
+                    Icons.upload_outlined,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Upload()));
                   }),
             ],
           ),
