@@ -1,6 +1,9 @@
+import 'package:etilang_apps/views/history/history_tilang.dart';
+import 'package:etilang_apps/views/history/history_users.dart';
 import 'package:flutter/material.dart';
-import 'package:etilang_apps/views/auth/welcome.dart';
-import 'package:flutter/material.dart';
+
+import 'package:etilang_apps/views/history/TabHistory.dart';
+
 import 'package:etilang_apps/component/appBarActionItems.dart';
 import 'package:etilang_apps/component/barChart.dart';
 import 'package:etilang_apps/component/header.dart';
@@ -12,16 +15,15 @@ import 'package:etilang_apps/config/responsive.dart';
 import 'package:etilang_apps/config/size_config.dart';
 import 'package:etilang_apps/style/colors.dart';
 import 'package:etilang_apps/style/style.dart';
-import 'package:etilang_apps/views/history/history_tilang.dart';
+
+String selectedCategorie = "Adults";
 
 class History extends StatefulWidget {
-  const History({Key key}) : super(key: key);
-
   @override
-  State<History> createState() => _History();
+  _HistoryState createState() => _HistoryState();
 }
 
-class _History extends State<History> {
+class _HistoryState extends State<History> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
@@ -45,57 +47,186 @@ class _History extends State<History> {
               preferredSize: Size.zero,
               child: SizedBox(),
             ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HistoryTilang()));
-              },
-              child: Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: const Center(
-                  child: Text(
-                    "History Tilang",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                ),
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 56, 2, 149),
-                    borderRadius: BorderRadius.circular(25)),
+      body: SingleChildScrollView(
+        child: Container(
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                height: 10,
               ),
-            ),
-            // InkWell(
-            //   onTap: () {
-            //     Navigator.push(context,
-            //         MaterialPageRoute(builder: (context) => HistoryUsers()));
-            //   },
-            //   child: Container(
-            //     margin:
-            //         const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            //     child: const Center(
-            //       child: Text(
-            //         "History Users",
-            //         style: TextStyle(
-            //             fontWeight: FontWeight.bold, color: Colors.black),
-            //       ),
-            //     ),
-            //     height: 50,
-            //     width: double.infinity,
-            //     decoration: BoxDecoration(
-            //         color: Color.fromARGB(255, 218, 223, 255),
-            //         borderRadius: BorderRadius.circular(25)),
-            //   ),
+              Text(
+                "History E-Tilang",
+                style: TextStyle(
+                    color: Colors.black87.withOpacity(0.8),
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                height: 50,
+                decoration: BoxDecoration(
+                    color: Color(0xffEFEFEF),
+                    borderRadius: BorderRadius.circular(14)),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.search),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Search",
+                      style: TextStyle(color: Colors.grey, fontSize: 19),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Text(
+                "Data",
+                style: TextStyle(
+                    color: Colors.black87.withOpacity(0.8),
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              DoctorsTile(),
+              SizedBox(
+                height: 25,
+              ),
+              Doctorslist(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class DoctorsTile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HistoryTilang()));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            color: Color.fromARGB(255, 157, 206, 255),
+            borderRadius: BorderRadius.circular(20)),
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+        child: Row(
+          children: <Widget>[
+            // Image.asset(
+            //   "assets/calendar.png",
+            //   height: 50,
             // ),
+            SizedBox(
+              width: 17,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Data Tilang",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 40, 40, 40), fontSize: 19),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Text(
+                  "History data tilang gess",
+                  style: TextStyle(
+                      fontSize: 15, color: Color.fromARGB(255, 92, 92, 92)),
+                )
+              ],
+            ),
+            Spacer(),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 77, 163, 255),
+                  borderRadius: BorderRadius.circular(13)),
+              child: Text(
+                "Klik",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Doctorslist extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HistoryUsers()));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            color: Color.fromARGB(255, 157, 206, 255),
+            borderRadius: BorderRadius.circular(20)),
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+        child: Row(
+          children: <Widget>[
+            // Image.asset(
+            //   "assets/calendar.png",
+            //   height: 50,
+            // ),
+            SizedBox(
+              width: 17,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Data User",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 52, 52, 52), fontSize: 19),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Text(
+                  "History user nih ges",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 85, 85, 85), fontSize: 15),
+                )
+              ],
+            ),
+            Spacer(),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 77, 163, 255),
+                  borderRadius: BorderRadius.circular(13)),
+              child: Text(
+                "Klik",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500),
+              ),
+            )
           ],
         ),
       ),

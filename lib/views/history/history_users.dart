@@ -1,121 +1,25 @@
-// import 'dart:convert';
-// // import 'package:dio/dio.dart';
-// import 'package:flutter/material.dart';
-// import 'package:http/http.dart' as http;
-
-// class HistoryUsers extends StatefulWidget {
-//   const HistoryUsers({Key? key}) : super(key: key);
-
-//   @override
-//   _HistoryUsers createState() => _HistoryUsers();
-// }
-
-// class User {
-//   final int id;
-//   final int email;
-//   final String namalengkap;
-//   final String password;
-//   final String username;
-//   final String tanggal;
-
-//   User({
-//     required this.id,
-//     required this.email,
-//     required this.namalengkap,
-//     required this.password,
-//     required this.username,
-//     required this.tanggal,
-//   });
-// }
-
-// class _HistoryUsers extends State<HistoryUsers> {
-//   Future<List<User>> getRequest() async {
-//     var url = Uri.parse("http://192.168.1.107:5000/api/data-users");
-//     final response = await http.get(url);
-//     var responseData = json.decode(response.body);
-
-//     List<User> users = [];
-//     for (var singleUser in responseData) {
-//       User user = User(
-//         id: singleUser["id"],
-//         email: singleUser["email"],
-//         namalengkap: singleUser["namalengkap"],
-//         password: singleUser["password"],
-//         username: singleUser["username"],
-//         tanggal: singleUser["tanggal"],
-//       );
-//       users.add(user);
-//     }
-//     return users;
-
-//     // List<User> users = [];
-//     // final String baseUrl = "http://127.0.0.1:5000";
-
-//     // void getRequest() async {
-//     //   final Dio dio = new Dio();
-
-//     //   try {
-//     //     var response = await dio.get("$baseUrl/api/data-users");
-//     //     print(response.statusCode);
-//     //     print(response.data);
-//     //     var responseData = response.data as List;
-
-//     //     setState(() {
-//     //       users = responseData.map((e) => User.fromJson(e));
-//     //     });
-//     //   } on DioError catch (e) {
-//     //     print(e);
-//     //   }
-//     // }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('History Users'),
-//         backgroundColor: Color.fromARGB(255, 0, 74, 126),
-//       ),
-//       body: Container(
-//         padding: EdgeInsets.all(16.0),
-//         child: FutureBuilder(
-//           future: getRequest(),
-//           builder: (BuildContext ctx, AsyncSnapshot snapshot) {
-//             if (snapshot.data == null) {
-//               return Container(
-//                 child: Center(
-//                   child: CircularProgressIndicator(),
-//                 ),
-//               );
-//             } else {
-//               return ListView.builder(
-//                 itemCount: snapshot.data.length,
-//                 itemBuilder: (ctx, index) => ListTile(
-//                   title: Text(snapshot.data[index].title),
-//                   subtitle: Text(snapshot.data[index].body),
-//                   contentPadding: EdgeInsets.only(bottom: 20.0),
-//                 ),
-//               );
-//             }
-//           },
-//         ),
-//       ),
-//       // ignore: avoid_unnecessary_containers
-//     );
-//   }
-// }
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:etilang_apps/component/appBarActionItems.dart';
+import 'package:etilang_apps/component/barChart.dart';
+import 'package:etilang_apps/component/header.dart';
+import 'package:etilang_apps/component/historyTable.dart';
+import 'package:etilang_apps/component/infoCard.dart';
+import 'package:etilang_apps/component/paymentDetailList.dart';
+import 'package:etilang_apps/component/sideMenu.dart';
+import 'package:etilang_apps/config/responsive.dart';
+import 'package:etilang_apps/config/size_config.dart';
+import 'package:etilang_apps/style/colors.dart';
+import 'package:etilang_apps/style/style.dart';
+
 class HistoryUsers extends StatelessWidget {
-  const HistoryUsers({Key key}) : super(key: key);
+  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
-  final String url = 'http://127.0.0.1:5000/api/data-users';
+  final String url = 'http://10.0.2.2/user/flutter';
 
-  Future getUsers() async {
+  Future getTilang() async {
     var response = await http.get(Uri.parse(url));
     print(json.decode(response.body));
     return json.decode(response.body);
@@ -123,37 +27,50 @@ class HistoryUsers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getUsers();
+    getTilang();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('History Users'),
-      ),
+      key: _drawerKey,
+      drawer: SizedBox(width: 100, child: SideMenu()),
+      appBar: !Responsive.isDesktop(context)
+          ? AppBar(
+              elevation: 0,
+              backgroundColor: AppColors.white,
+              leading: IconButton(
+                  onPressed: () {
+                    _drawerKey.currentState.openDrawer();
+                  },
+                  icon: Icon(Icons.menu, color: AppColors.black)),
+              actions: [
+                AppBarActionItems(),
+              ],
+            )
+          : PreferredSize(
+              preferredSize: Size.zero,
+              child: SizedBox(),
+            ),
       body: FutureBuilder(
-          future: getUsers(),
+          future: getTilang(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              // return Text('Data Ok');
+              // return Text('Data Tilang Ok');
               return ListView.builder(
-                  itemCount: snapshot.data['data'].length,
+                  itemCount: snapshot.data['users'].length,
                   itemBuilder: (context, index) {
                     // return Text(snapshot.data['data'][index]['username']);
                     return Container(
-                      height: 100,
+                      height: 80,
                       child: Card(
                         elevation: 5,
-                        child: Row(
+                        child: Column(
                           children: [
                             Text(
-                              snapshot.data['data'][index]['id'],
+                              snapshot.data['users'][index]['namalengkap'],
                             ),
                             Text(
-                              snapshot.data['data'][index]['username'],
+                              snapshot.data['users'][index]['email'],
                             ),
                             Text(
-                              snapshot.data['data'][index]['email'],
-                            ),
-                            Text(
-                              snapshot.data['data'][index]['namalengkap'],
+                              snapshot.data['users'][index]['tanggal'],
                             ),
                           ],
                         ),
@@ -161,7 +78,7 @@ class HistoryUsers extends StatelessWidget {
                     );
                   });
             } else {
-              return Text('Data Error');
+              return Text('Error');
             }
           }),
     );

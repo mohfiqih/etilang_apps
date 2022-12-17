@@ -42,11 +42,11 @@ class HttpService {
     }
   }
 
-  static register(username, email, namalengkap, password, context) async {
+  static register(email, password, context) async {
     http.Response response = await _client.post(_registerUrl, body: {
-      "username": username,
+      // "username": username,
       "email": email,
-      "namalengkap": namalengkap,
+      // "namalengkap": namalengkap,
       "password": password,
     });
 

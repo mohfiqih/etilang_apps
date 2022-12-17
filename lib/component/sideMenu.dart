@@ -1,4 +1,5 @@
 import 'package:etilang_apps/dashboard.dart';
+import 'package:etilang_apps/views/history/history_tilang.dart';
 import 'package:etilang_apps/views/home/History.dart';
 import 'package:etilang_apps/views/home/Inbox.dart';
 import 'package:etilang_apps/views/home/Kamera.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:etilang_apps/config/size_config.dart';
 import 'package:etilang_apps/style/colors.dart';
 import 'package:etilang_apps/views/home/upload.dart';
+import 'package:etilang_apps/views/home/coba_upload.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
@@ -59,17 +61,17 @@ class SideMenu extends StatelessWidget {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => History()));
                   }),
-              IconButton(
-                  iconSize: 25,
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
-                  icon: Icon(
-                    Icons.camera_alt_outlined,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Kamera()));
-                  }),
+              // IconButton(
+              //     iconSize: 25,
+              //     padding: EdgeInsets.symmetric(vertical: 20.0),
+              //     icon: Icon(
+              //       Icons.camera_alt_outlined,
+              //       color: Colors.black,
+              //     ),
+              //     onPressed: () {
+              //       Navigator.push(context,
+              //           MaterialPageRoute(builder: (context) => Kamera()));
+              //     }),
               IconButton(
                   iconSize: 25,
                   padding: EdgeInsets.symmetric(vertical: 20.0),
@@ -92,16 +94,27 @@ class SideMenu extends StatelessWidget {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Profil()));
                   }),
+              // IconButton(
+              //     iconSize: 25,
+              //     padding: EdgeInsets.symmetric(vertical: 20.0),
+              //     icon: Icon(
+              //       Icons.upload_outlined,
+              //       color: Colors.black,
+              //     ),
+              //     onPressed: () {
+              //       Navigator.push(context,
+              //           MaterialPageRoute(builder: (context) => Upload()));
+              //     }),
               IconButton(
                   iconSize: 25,
                   padding: EdgeInsets.symmetric(vertical: 20.0),
                   icon: Icon(
-                    Icons.upload_outlined,
+                    Icons.upload_file,
                     color: Colors.black,
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Upload()));
+                        MaterialPageRoute(builder: (context) => Coba_upload()));
                   }),
             ],
           ),

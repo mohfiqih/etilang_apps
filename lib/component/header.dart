@@ -19,7 +19,7 @@ class Header extends StatelessWidget {
               PrimaryText(
                   text: 'Dashboard', size: 25, fontWeight: FontWeight.w800),
               PrimaryText(
-                text: 'Elang Apps',
+                text: 'E-Tilang Apps',
                 size: 16,
                 fontWeight: FontWeight.w400,
                 color: AppColors.secondary,

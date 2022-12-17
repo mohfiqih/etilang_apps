@@ -24,7 +24,7 @@ class _Splash extends State<Splash> {
     return Timer(duration, () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) {
-          return Dashboard();
+          return OnboardingScreen();
         }),
       );
     });
@@ -33,13 +33,13 @@ class _Splash extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF5036D5),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: Center(
         child: Center(
           child: Image(
-            image: AssetImage('assets/images/splash.png'),
-            height: 150.0,
-            width: 150.0,
+            image: AssetImage('assets/images/MOBILE.gif'),
+            height: 200.0,
+            width: 200.0,
           ),
           // child: Icon(
           //   Icons.bike_scooter_outlined,

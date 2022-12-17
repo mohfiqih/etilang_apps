@@ -7,7 +7,7 @@ class UserApi {
   Future<List<User>> getAllUsers() async {
     var client = http.Client();
     //http://127.0.0.1:5000/user
-    var uri = Uri.parse("http://127.0.0.1:5000/user_table");
+    var uri = Uri.parse("http://10.0.2.2/user_table");
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;
@@ -18,7 +18,7 @@ class UserApi {
   //Add New User
   Future<User> addUser(String namalengkap, String email) async {
     var client = http.Client();
-    var uri = Uri.parse("http://127.0.0.1:5000/user_table");
+    var uri = Uri.parse("http://10.0.2.2/user_table");
     final http.Response response = await client.post(
       uri,
       headers: <String, String>{
@@ -38,7 +38,7 @@ class UserApi {
   //Delete User
   Future<User> deleteUSer(int id) async {
     var client = http.Client();
-    var uri = Uri.parse("http://127.0.0.1:5000/user_table/$id");
+    var uri = Uri.parse("http://10.0.2.2/user_table/$id");
     final http.Response response =
         await client.delete(uri, headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
@@ -54,7 +54,7 @@ class UserApi {
   //Update User
   Future<User> updateUser(String namalengkap, String email, int id) async {
     var client = http.Client();
-    var uri = Uri.parse("http://127.0.0.1:5000/user_table/$id");
+    var uri = Uri.parse("http://10.0.2.2/user_table/$id");
     final http.Response response = await client.put(
       uri,
       headers: <String, String>{

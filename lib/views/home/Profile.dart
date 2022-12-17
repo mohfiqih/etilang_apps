@@ -1,6 +1,8 @@
+import 'package:etilang_apps/dashboard.dart';
+import 'package:etilang_apps/onboarding.dart';
 import 'package:flutter/material.dart';
-import 'package:etilang_apps/views/auth/welcome.dart';
-import 'package:flutter/material.dart';
+import 'package:etilang_apps/main.dart';
+
 import 'package:etilang_apps/component/appBarActionItems.dart';
 import 'package:etilang_apps/component/barChart.dart';
 import 'package:etilang_apps/component/header.dart';
@@ -13,15 +15,12 @@ import 'package:etilang_apps/config/size_config.dart';
 import 'package:etilang_apps/style/colors.dart';
 import 'package:etilang_apps/style/style.dart';
 
-class Profil extends StatefulWidget {
-  const Profil({Key key}) : super(key: key);
+void main() => runApp(Profil()); // initiate MyApp as  StatelessWidget
 
-  @override
-  State<Profil> createState() => _Profil();
-}
-
-class _Profil extends State<Profil> {
+// Main class
+class Profil extends StatelessWidget {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  // creating main screen and building list of wordpairs
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,63 +43,179 @@ class _Profil extends State<Profil> {
               preferredSize: Size.zero,
               child: SizedBox(),
             ),
-      body: ListView(
-        padding: const EdgeInsets.all(20),
-        children: <Widget>[
-          Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              Positioned(
-                child: CircleAvatar(
-                  radius: 80,
-                  backgroundColor: Colors.white,
-                  backgroundImage: AssetImage('assets/images/logo.png'),
-                ),
+      body: Column(
+        children: [
+          const Expanded(flex: 2, child: _TopPortion()),
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Text(
+                    "E-Tilang Apps",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FloatingActionButton.extended(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Dashboard()));
+                        },
+                        heroTag: 'follow',
+                        elevation: 0,
+                        label: const Text("Home"),
+                        icon: const Icon(Icons.home_outlined),
+                      ),
+                      const SizedBox(width: 16.0),
+                      FloatingActionButton.extended(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => OnboardingScreen()));
+                        },
+                        heroTag: 'mesage',
+                        elevation: 0,
+                        backgroundColor: Colors.red,
+                        label: const Text("Logout"),
+                        icon: const Icon(Icons.logout_outlined),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  const _ProfileInfoRow()
+                ],
               ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          ListTile(
-            title: Text(
-              "Capstone Project",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text('Web Developer & Flutter Developer'),
-          ),
-          ListTile(
-            title: Text(
-              "About Me",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(
-                'E-Tilang merupakan sebuah sistem yang digunakan sebagai sarana tilang secara elektronik, batasan dari sistem E-Tilang ini adalah sistem akan mendeteksi objek pengendara dengan apakah pengendara tersebut menggunakan helm atau tidak, dan mendeteksi plat putih dari pengendara motor.'),
-          ),
-          SizedBox(height: 10),
-          InkWell(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => WelcomePage()));
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: const Center(
-                child: Text(
-                  "Logout",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-              ),
-              height: 40,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 205, 5, 18),
-                  borderRadius: BorderRadius.circular(15)),
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ProfileInfoRow extends StatelessWidget {
+  const _ProfileInfoRow({Key key}) : super(key: key);
+
+  final List<ProfileInfoItem> _items = const [
+    ProfileInfoItem("Posts", 900),
+    ProfileInfoItem("Followers", 120),
+    ProfileInfoItem("Following", 200),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      constraints: const BoxConstraints(maxWidth: 400),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: _items
+            .map((item) => Expanded(
+                    child: Row(
+                  children: [
+                    if (_items.indexOf(item) != 0) const VerticalDivider(),
+                    Expanded(child: _singleItem(context, item)),
+                  ],
+                )))
+            .toList(),
+      ),
+    );
+  }
+
+  Widget _singleItem(BuildContext context, ProfileInfoItem item) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              item.value.toString(),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          ),
+          Text(
+            item.title,
+            style: Theme.of(context).textTheme.caption,
+          )
+        ],
+      );
+}
+
+class ProfileInfoItem {
+  final String title;
+  final int value;
+  const ProfileInfoItem(this.title, this.value);
+}
+
+class _TopPortion extends StatelessWidget {
+  const _TopPortion({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        // Container(
+        //   margin: const EdgeInsets.only(bottom: 100),
+        //   decoration: const BoxDecoration(
+        //       gradient: LinearGradient(
+        //           begin: Alignment.bottomCenter,
+        //           end: Alignment.topCenter,
+        //           colors: [
+        //             Color.fromARGB(255, 255, 255, 255),
+        //             Color.fromARGB(255, 255, 255, 255)
+        //           ]),
+        //       borderRadius: BorderRadius.only(
+        //         bottomLeft: Radius.circular(60),
+        //         bottomRight: Radius.circular(60),
+        //       )),
+        // ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: SizedBox(
+            width: 200,
+            height: 200,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        fit: BoxFit.cover, image: NetworkImage('')),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    child: Container(
+                      margin: const EdgeInsets.all(8.0),
+                      decoration: const BoxDecoration(
+                          color: Colors.green, shape: BoxShape.circle),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -89,8 +89,8 @@ class _FotoState extends State<Foto> {
             TextFormField(
               controller: null,
               decoration: InputDecoration(
-                  labelText: "Caption",
-                  hintText: "Masukkan Caption",
+                  labelText: "Nama File",
+                  hintText: "Masukkan Nama File",
                   border: OutlineInputBorder()), // InputDecoration
             ),
             SizedBox(

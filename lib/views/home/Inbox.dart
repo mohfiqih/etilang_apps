@@ -34,9 +34,10 @@ class _ChatBubbleState extends State<ChatBubble> {
     _txtController.clear();
 
     var response =
-        await http.get(Uri.parse("http://127.0.0.1:5000/get?msg=[$userReply]"));
+        await http.get(Uri.parse("http://10.0.2.2/get?msg=[$userReply]"));
 
     var data = jsonDecode(response.body);
+
     var botReply = data["msg"];
 
     Message msg = Message(

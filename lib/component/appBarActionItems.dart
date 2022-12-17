@@ -4,11 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:etilang_apps/style/colors.dart';
 import 'package:etilang_apps/views/home/Profile.dart';
+// import 'package:url_launcher/url_launcher';
 
 class AppBarActionItems extends StatelessWidget {
-  const AppBarActionItems({
-    Key key,
-  }) : super(key: key);
+  // const AppBarActionItems({
+  //   Key key,
+  // }) : super(key: key);
+
+  // _launchURL(String url) async {
+  //   if (await canLaunch(url)) {
+  //     await launch(url);
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
+  String url = 'https://www.youtube.com/';
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +43,9 @@ class AppBarActionItems extends StatelessWidget {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ChatBubble()));
+              url;
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => ChatBubble()));
             }),
         SizedBox(width: 15),
         IconButton(

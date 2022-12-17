@@ -11,9 +11,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  String username;
   String email;
-  String namalengkap;
   String password;
 
   @override
@@ -46,27 +44,27 @@ class _RegisterPageState extends State<RegisterPage> {
                   const Spacer(),
                 ],
               ),
-              SizedBox(height: 20),
-              TextField(
-                textInputAction: TextInputAction.done,
-                obscureText: false,
-                cursorColor: kPrimaryColor,
-                decoration: InputDecoration(
-                  hintText: 'Masukan Username',
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.all(defaultPadding),
-                    child: Icon(Icons.account_circle),
-                  ),
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    username = value;
-                  });
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
+              // SizedBox(height: 20),
+              // TextField(
+              //   textInputAction: TextInputAction.done,
+              //   obscureText: false,
+              //   cursorColor: kPrimaryColor,
+              //   decoration: InputDecoration(
+              //     hintText: 'Masukan Username',
+              //     prefixIcon: Padding(
+              //       padding: const EdgeInsets.all(defaultPadding),
+              //       child: Icon(Icons.account_circle),
+              //     ),
+              //   ),
+              //   onChanged: (value) {
+              //     setState(() {
+              //       username = value;
+              //     });
+              //   },
+              // ),
+              // SizedBox(
+              //   height: 10,
+              // ),
               TextField(
                 textInputAction: TextInputAction.done,
                 obscureText: false,
@@ -87,26 +85,26 @@ class _RegisterPageState extends State<RegisterPage> {
               SizedBox(
                 height: 10,
               ),
-              TextField(
-                textInputAction: TextInputAction.done,
-                obscureText: false,
-                cursorColor: kPrimaryColor,
-                decoration: InputDecoration(
-                  hintText: 'Masukan Nama Lengkap',
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.all(defaultPadding),
-                    child: Icon(Icons.people_alt_rounded),
-                  ),
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    namalengkap = value;
-                  });
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
+              // TextField(
+              //   textInputAction: TextInputAction.done,
+              //   obscureText: false,
+              //   cursorColor: kPrimaryColor,
+              //   decoration: InputDecoration(
+              //     hintText: 'Masukan Nama Lengkap',
+              //     prefixIcon: Padding(
+              //       padding: const EdgeInsets.all(defaultPadding),
+              //       child: Icon(Icons.people_alt_rounded),
+              //     ),
+              //   ),
+              //   onChanged: (value) {
+              //     setState(() {
+              //       namalengkap = value;
+              //     });
+              //   },
+              // ),
+              // SizedBox(
+              //   height: 10,
+              // ),
               TextField(
                 textInputAction: TextInputAction.done,
                 obscureText: true,
@@ -126,8 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               InkWell(
                 onTap: () async {
-                  await HttpService.register(
-                      username, email, namalengkap, password, context);
+                  await HttpService.register(email, password, context);
                 },
                 child: Container(
                   margin:
