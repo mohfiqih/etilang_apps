@@ -96,7 +96,7 @@ class _Upload extends State<Upload> {
             itemCount: users?.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(users[index].namalengkap),
+                title: Text(users[index].password),
                 subtitle: Text(users[index].email),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,

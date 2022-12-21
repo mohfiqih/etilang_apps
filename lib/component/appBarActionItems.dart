@@ -19,7 +19,6 @@ class AppBarActionItems extends StatelessWidget {
   //   }
   // }
   String url = 'https://www.youtube.com/';
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -43,9 +42,9 @@ class AppBarActionItems extends StatelessWidget {
               color: Colors.black,
             ),
             onPressed: () {
-              url;
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => ChatBubble()));
+              // url;
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ChatBubble()));
             }),
         SizedBox(width: 15),
         IconButton(

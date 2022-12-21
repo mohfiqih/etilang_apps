@@ -87,15 +87,15 @@ class _HistoryState extends State<History> {
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 15,
               ),
-              Text(
-                "Data",
-                style: TextStyle(
-                    color: Colors.black87.withOpacity(0.8),
-                    fontSize: 25,
-                    fontWeight: FontWeight.w600),
-              ),
+              // Text(
+              //   "Data",
+              //   style: TextStyle(
+              //       color: Colors.black87.withOpacity(0.8),
+              //       fontSize: 25,
+              //       fontWeight: FontWeight.w600),
+              // ),
               SizedBox(
                 height: 20,
               ),
@@ -103,7 +103,7 @@ class _HistoryState extends State<History> {
               SizedBox(
                 height: 25,
               ),
-              Doctorslist(),
+              // Doctorslist(),
             ],
           ),
         ),
@@ -146,10 +146,10 @@ class DoctorsTile extends StatelessWidget {
                   height: 2,
                 ),
                 Text(
-                  "History data tilang gess",
+                  "History data tilang",
                   style: TextStyle(
                       fontSize: 15, color: Color.fromARGB(255, 92, 92, 92)),
-                )
+                ),
               ],
             ),
             Spacer(),
@@ -165,7 +165,7 @@ class DoctorsTile extends StatelessWidget {
                     fontSize: 13,
                     fontWeight: FontWeight.w500),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -173,63 +173,63 @@ class DoctorsTile extends StatelessWidget {
   }
 }
 
-class Doctorslist extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HistoryUsers()));
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            color: Color.fromARGB(255, 157, 206, 255),
-            borderRadius: BorderRadius.circular(20)),
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-        child: Row(
-          children: <Widget>[
-            // Image.asset(
-            //   "assets/calendar.png",
-            //   height: 50,
-            // ),
-            SizedBox(
-              width: 17,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "Data User",
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 52, 52, 52), fontSize: 19),
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Text(
-                  "History user nih ges",
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 85, 85, 85), fontSize: 15),
-                )
-              ],
-            ),
-            Spacer(),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 9),
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 77, 163, 255),
-                  borderRadius: BorderRadius.circular(13)),
-              child: Text(
-                "Klik",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
+// class Doctorslist extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: () {
+//         Navigator.push(
+//             context, MaterialPageRoute(builder: (context) => HistoryUsers()));
+//       },
+//       child: Container(
+//         decoration: BoxDecoration(
+//             color: Color.fromARGB(255, 157, 206, 255),
+//             borderRadius: BorderRadius.circular(20)),
+//         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+//         child: Row(
+//           children: <Widget>[
+//             // Image.asset(
+//             //   "assets/calendar.png",
+//             //   height: 50,
+//             // ),
+//             SizedBox(
+//               width: 17,
+//             ),
+//             Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: <Widget>[
+//                 Text(
+//                   "Data User",
+//                   style: TextStyle(
+//                       color: Color.fromARGB(255, 52, 52, 52), fontSize: 19),
+//                 ),
+//                 SizedBox(
+//                   height: 2,
+//                 ),
+//                 Text(
+//                   "History user nih ges",
+//                   style: TextStyle(
+//                       color: Color.fromARGB(255, 85, 85, 85), fontSize: 15),
+//                 )
+//               ],
+//             ),
+//             Spacer(),
+//             Container(
+//               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+//               decoration: BoxDecoration(
+//                   color: Color.fromARGB(255, 77, 163, 255),
+//                   borderRadius: BorderRadius.circular(13)),
+//               child: Text(
+//                 "Klik",
+//                 style: TextStyle(
+//                     color: Colors.white,
+//                     fontSize: 13,
+//                     fontWeight: FontWeight.w500),
+//               ),
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

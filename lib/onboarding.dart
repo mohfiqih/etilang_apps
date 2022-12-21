@@ -63,10 +63,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WelcomePage()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Dashboard()));
                     },
                     child: Text(
                       'Skip',
@@ -109,7 +107,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               color: Colors.white,
                             ),
                             Text(
-                              'E-Lang Apps v.1.0',
+                              'E-Tilang Apps v.1.0',
                               style: kTitleStyle,
                             ),
                             SizedBox(height: 15.0),

@@ -1,7 +1,7 @@
-import 'dart:convert';
+import 'package:etilang_apps/views/home/coba_upload.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
+import 'package:etilang_apps/views/auth/welcome.dart';
+import 'package:flutter/material.dart';
 import 'package:etilang_apps/component/appBarActionItems.dart';
 import 'package:etilang_apps/component/barChart.dart';
 import 'package:etilang_apps/component/header.dart';
@@ -14,20 +14,62 @@ import 'package:etilang_apps/config/size_config.dart';
 import 'package:etilang_apps/style/colors.dart';
 import 'package:etilang_apps/style/style.dart';
 
-class HistoryUsers extends StatelessWidget {
+import 'package:etilang_apps/models/user.dart';
+import 'package:etilang_apps/service/userApi.dart';
+import 'package:etilang_apps/views/upload/addUserForm.dart';
+import 'package:etilang_apps/views/upload/updateUserForm.dart';
+
+class HistoryUsers extends StatefulWidget {
+  const HistoryUsers({Key key}) : super(key: key);
+
+  @override
+  State<HistoryUsers> createState() => _HistoryUsers();
+}
+
+class _HistoryUsers extends State<HistoryUsers> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
-  final String url = 'http://10.0.2.2/user/flutter';
+  List<User> users;
+  var isLoaded = false;
 
-  Future getTilang() async {
-    var response = await http.get(Uri.parse(url));
-    print(json.decode(response.body));
-    return json.decode(response.body);
+  @override
+  void initState() {
+    getRecord();
+  }
+
+  getRecord() async {
+    users = await UserApi().getAllUsers();
+    if (users != null) {
+      setState(() {
+        isLoaded = true;
+      });
+    }
+  }
+
+  Future<void> showMessageDialog(String title, String msg) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: Text(
+              msg,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Ok'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    getTilang();
     return Scaffold(
       key: _drawerKey,
       drawer: SizedBox(width: 100, child: SideMenu()),
@@ -48,39 +90,67 @@ class HistoryUsers extends StatelessWidget {
               preferredSize: Size.zero,
               child: SizedBox(),
             ),
-      body: FutureBuilder(
-          future: getTilang(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              // return Text('Data Tilang Ok');
-              return ListView.builder(
-                  itemCount: snapshot.data['users'].length,
-                  itemBuilder: (context, index) {
-                    // return Text(snapshot.data['data'][index]['username']);
-                    return Container(
-                      height: 80,
-                      child: Card(
-                        elevation: 5,
-                        child: Column(
-                          children: [
-                            Text(
-                              snapshot.data['users'][index]['namalengkap'],
-                            ),
-                            Text(
-                              snapshot.data['users'][index]['email'],
-                            ),
-                            Text(
-                              snapshot.data['users'][index]['tanggal'],
-                            ),
-                          ],
+      body: Visibility(
+        visible: isLoaded,
+        replacement: const Center(child: CircularProgressIndicator()),
+        child: ListView.builder(
+            itemCount: users?.length,
+            itemBuilder: (context, index) {
+              return Container(
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(145, 248, 248, 248),
+                    borderRadius: BorderRadius.circular(20)),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+                child: Row(
+                  children: <Widget>[
+                    // Image.asset(
+                    //   "assets/calendar.png",
+                    //   height: 50,
+                    // ),
+                    SizedBox(
+                      width: 17,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          width: 17,
                         ),
-                      ),
-                    );
-                  });
-            } else {
-              return Text('Error');
+                        Text(
+                          users[index].email,
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 40, 40, 40),
+                              fontSize: 19),
+                        ),
+                        SizedBox(
+                          height: 2,
+                        ),
+                        Text(
+                          users[index].password,
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Color.fromARGB(255, 92, 92, 92)),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => addUserForm()))
+              .then((data) {
+            if (data != null) {
+              showMessageDialog("Success", "$data Detail Added Success.");
+              getRecord();
             }
-          }),
+          });
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

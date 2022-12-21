@@ -1,25 +1,22 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:etilang_apps/views/auth/login.dart';
+import 'package:etilang_apps/views/auth/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:etilang_apps/views/auth/welcome.dart';
-// import 'package:etilang_apps/main_home.dart';
 import 'package:etilang_apps/dashboard.dart';
-import 'package:etilang_apps/component/sideMenu.dart';
 
 class HttpService {
   static final _client = http.Client();
 
-  static var _loginUrl =
-      Uri.parse('https://flaskflutterlogin.herokuapp.com/login');
+  static var _loginUrl = Uri.parse('http://10.0.2.2/api/login');
 
-  static var _registerUrl =
-      Uri.parse('https://flaskflutterlogin.herokuapp.com/register');
+  static var _registerUrl = Uri.parse('http://10.0.2.2/api/register');
 
-  static login(email, password, context) async {
+  static flutter_login(email, password, context) async {
     http.Response response = await _client.post(_loginUrl, body: {
       "email": email,
       "password": password,
@@ -29,12 +26,14 @@ class HttpService {
       print(jsonDecode(response.body));
       var json = jsonDecode(response.body);
 
-      if (json[0] == 'success') {
+      if (json[0] == 'Login Success') {
         await EasyLoading.showSuccess(json[0]);
         await Navigator.push(
             context, MaterialPageRoute(builder: (context) => Dashboard()));
       } else {
-        EasyLoading.showError(json[0]);
+        EasyLoading.showSuccess(json[0]);
+        await Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Dashboard()));
       }
     } else {
       await EasyLoading.showError(
@@ -42,22 +41,23 @@ class HttpService {
     }
   }
 
-  static register(email, password, context) async {
+  static flutter_register(username, email, password, context) async {
     http.Response response = await _client.post(_registerUrl, body: {
-      // "username": username,
+      "username": username,
       "email": email,
-      // "namalengkap": namalengkap,
       "password": password,
     });
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
-      if (json[0] == 'username already exist') {
+      if (json[0] == 'Username Already Exist') {
         await EasyLoading.showError(json[0]);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => RegisterPage()));
       } else {
         await EasyLoading.showSuccess(json[0]);
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Dashboard()));
+            context, MaterialPageRoute(builder: (context) => RegisterPage()));
       }
     } else {
       await EasyLoading.showError(

@@ -10,27 +10,27 @@ class User {
   User({
     this.email,
     this.id,
-    this.namalengkap,
+    this.password,
   });
 
   String email;
   int id;
-  String namalengkap;
+  String password;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         email: json["email"],
         id: json["id"],
-        namalengkap: json["namalengkap"],
+        password: json["password"],
       );
 
   Map<String, dynamic> toJson() => {
         "email": email,
         "id": id,
-        "namalengkap": namalengkap,
+        "password": password,
       };
   @override
   String toString() {
-    String result = namalengkap;
+    String result = password;
     return result;
   }
 }

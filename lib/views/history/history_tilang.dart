@@ -1,7 +1,7 @@
-import 'dart:convert';
+import 'package:etilang_apps/views/home/coba_upload.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
+import 'package:etilang_apps/views/auth/welcome.dart';
+import 'package:flutter/material.dart';
 import 'package:etilang_apps/component/appBarActionItems.dart';
 import 'package:etilang_apps/component/barChart.dart';
 import 'package:etilang_apps/component/header.dart';
@@ -14,20 +14,39 @@ import 'package:etilang_apps/config/size_config.dart';
 import 'package:etilang_apps/style/colors.dart';
 import 'package:etilang_apps/style/style.dart';
 
-class HistoryTilang extends StatelessWidget {
+import 'package:etilang_apps/models/tilang.dart';
+import 'package:etilang_apps/service/tilangApi.dart';
+import 'package:etilang_apps/views/upload/addUserForm.dart';
+import 'package:etilang_apps/views/upload/updateUserForm.dart';
+
+class HistoryTilang extends StatefulWidget {
+  const HistoryTilang({Key key}) : super(key: key);
+
+  @override
+  State<HistoryTilang> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<HistoryTilang> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  List<Tilang> tilang;
+  var isLoaded = false;
 
-  final String url = 'http://10.0.2.2/api/flutter';
+  @override
+  void initState() {
+    getRecord();
+  }
 
-  Future getTilang() async {
-    var response = await http.get(Uri.parse(url));
-    print(json.decode(response.body));
-    return json.decode(response.body);
+  getRecord() async {
+    tilang = await TilangApi().getAllTilang();
+    if (tilang != null) {
+      setState(() {
+        isLoaded = true;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    getTilang();
     return Scaffold(
       key: _drawerKey,
       drawer: SizedBox(width: 100, child: SideMenu()),
@@ -48,46 +67,90 @@ class HistoryTilang extends StatelessWidget {
               preferredSize: Size.zero,
               child: SizedBox(),
             ),
-      body: FutureBuilder(
-          future: getTilang(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              // return Text('Data Tilang Ok');
-              return ListView.builder(
-                  itemCount: snapshot.data['tilang'].length,
-                  itemBuilder: (context, index) {
-                    // return Text(snapshot.data['data'][index]['username']);
-                    return Container(
-                      height: 170,
-                      child: Card(
-                        elevation: 5,
-                        child: Column(
-                          children: [
-                            Text(
-                              snapshot.data['tilang'][index]['no_plat'],
-                            ),
-                            Text(
-                              snapshot.data['tilang'][index]['filename'],
-                            ),
-                            Text(
-                              snapshot.data['tilang'][index]['pelanggaran'],
-                            ),
-                            Text(
-                              snapshot.data['tilang'][index]
-                                  ['filename_pelanggaran'],
-                            ),
-                            Text(
-                              snapshot.data['tilang'][index]['tanggal'],
-                            ),
-                          ],
-                        ),
+      body: Visibility(
+        visible: isLoaded,
+        replacement: const Center(child: CircularProgressIndicator()),
+        child: ListView.builder(
+          itemCount: tilang?.length,
+          itemBuilder: (context, index) {
+            return Container(
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(145, 117, 172, 255),
+                  borderRadius: BorderRadius.circular(20)),
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+              child: Row(
+                children: <Widget>[
+                  // Image.asset(
+                  //   "assets/calendar.png",
+                  //   height: 50,
+                  // ),
+                  SizedBox(
+                    width: 17,
+                    height: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        width: 17,
                       ),
-                    );
-                  });
-            } else {
-              return Text('Error');
-            }
-          }),
+                      Text(
+                        tilang[index].no_plat,
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 40, 40, 40),
+                            fontSize: 19),
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        tilang[index].filename,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 92, 92, 92)),
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        tilang[index].pelanggaran,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 92, 92, 92)),
+                      ),
+                      Text(
+                        tilang[index].filename_pelanggaran,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 92, 92, 92)),
+                      ),
+                      Text(
+                        tilang[index].akurasi,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 92, 92, 92)),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     Navigator.push(context,
+      //             MaterialPageRoute(builder: (context) => Coba_upload()))
+      //         .then((data) {
+      //       if (data != null) {
+      //         showMessageDialog("Success", "$data Detail Added Success.");
+      //         getRecord();
+      //       }
+      //     });
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }

@@ -19,7 +19,7 @@ class _updateUserFormState extends State<updateUserForm> {
 
   @override
   void initState() {
-    _userNamaController.text = widget.user.namalengkap;
+    _userNamaController.text = widget.user.password;
     _emailController.text = widget.user.email;
   }
 

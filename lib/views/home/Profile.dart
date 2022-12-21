@@ -1,5 +1,6 @@
 import 'package:etilang_apps/dashboard.dart';
 import 'package:etilang_apps/onboarding.dart';
+import 'package:etilang_apps/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:etilang_apps/main.dart';
 
@@ -81,7 +82,7 @@ class Profil extends StatelessWidget {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => OnboardingScreen()));
+                                  builder: (context) => Splash()));
                         },
                         heroTag: 'mesage',
                         elevation: 0,
