@@ -61,17 +61,17 @@ class SideMenu extends StatelessWidget {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => History()));
                   }),
-              // IconButton(
-              //     iconSize: 25,
-              //     padding: EdgeInsets.symmetric(vertical: 20.0),
-              //     icon: Icon(
-              //       Icons.camera_alt_outlined,
-              //       color: Colors.black,
-              //     ),
-              //     onPressed: () {
-              //       Navigator.push(context,
-              //           MaterialPageRoute(builder: (context) => Kamera()));
-              //     }),
+              IconButton(
+                  iconSize: 25,
+                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                  icon: Icon(
+                    Icons.camera_alt_outlined,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Kamera()));
+                  }),
               IconButton(
                   iconSize: 25,
                   padding: EdgeInsets.symmetric(vertical: 20.0),

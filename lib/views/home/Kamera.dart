@@ -48,7 +48,7 @@ class _Kamera extends State<Kamera> {
       backgroundColor: Colors.grey,
       body: Container(),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.camera),
+        child: Icon(Icons.camera_alt_outlined),
         onPressed: () {
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => Foto()));

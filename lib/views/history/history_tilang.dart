@@ -16,8 +16,8 @@ import 'package:etilang_apps/style/style.dart';
 
 import 'package:etilang_apps/models/tilang.dart';
 import 'package:etilang_apps/service/tilangApi.dart';
-import 'package:etilang_apps/views/upload/addUserForm.dart';
-import 'package:etilang_apps/views/upload/updateUserForm.dart';
+// import 'package:etilang_apps/views/upload/addUserForm.dart';
+// import 'package:etilang_apps/views/upload/updateUserForm.dart';
 
 class HistoryTilang extends StatefulWidget {
   const HistoryTilang({Key key}) : super(key: key);
@@ -43,6 +43,28 @@ class _MyWidgetState extends State<HistoryTilang> {
         isLoaded = true;
       });
     }
+  }
+
+  Future<void> showMessageDialog(String title, String msg) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: Text(
+              msg,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Ok'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -74,16 +96,14 @@ class _MyWidgetState extends State<HistoryTilang> {
           itemCount: tilang?.length,
           itemBuilder: (context, index) {
             return Container(
+              margin: new EdgeInsets.all(15.00),
               decoration: BoxDecoration(
-                  color: Color.fromARGB(145, 117, 172, 255),
+                  color: Color.fromRGBO(190, 223, 255, 1),
                   borderRadius: BorderRadius.circular(20)),
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
+              // padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
               child: Row(
                 children: <Widget>[
-                  // Image.asset(
-                  //   "assets/calendar.png",
-                  //   height: 50,
-                  // ),
                   SizedBox(
                     width: 17,
                     height: 10,
@@ -91,66 +111,106 @@ class _MyWidgetState extends State<HistoryTilang> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      SizedBox(
-                        width: 17,
-                      ),
                       Text(
-                        tilang[index].no_plat,
+                        "No Plat : " + tilang[index].no_plat,
                         style: TextStyle(
                             color: Color.fromARGB(255, 40, 40, 40),
                             fontSize: 19),
                       ),
-                      SizedBox(
-                        height: 2,
-                      ),
+                      // SizedBox(
+                      //   height: 2,
+                      // ),
                       Text(
-                        tilang[index].filename,
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 92, 92, 92)),
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Text(
-                        tilang[index].pelanggaran,
+                        "Pelanggaran : " + tilang[index].pelanggaran,
                         style: TextStyle(
                             fontSize: 15,
                             color: Color.fromARGB(255, 92, 92, 92)),
                       ),
                       Text(
-                        tilang[index].filename_pelanggaran,
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 92, 92, 92)),
-                      ),
-                      Text(
-                        tilang[index].akurasi,
+                        "Akurasi : " + tilang[index].akurasi + "%",
                         style: TextStyle(
                             fontSize: 15,
                             color: Color.fromARGB(255, 92, 92, 92)),
                       ),
                     ],
                   ),
+                  Spacer(),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 77, 77),
+                        borderRadius: BorderRadius.circular(13)),
+                    child: Text(
+                      "Hapus",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: <Widget>[
+                  //     SizedBox(
+                  //       width: 17,
+                  //     ),
+                  //     Text(
+                  //       tilang[index].no_plat,
+                  //       style: TextStyle(
+                  //           color: Color.fromARGB(255, 40, 40, 40),
+                  //           fontSize: 19),
+                  //     ),
+                  //     SizedBox(
+                  //       height: 2,
+                  //     ),
+                  //     Text(
+                  //       tilang[index].filename,
+                  //       style: TextStyle(
+                  //           fontSize: 15,
+                  //           color: Color.fromARGB(255, 92, 92, 92)),
+                  //     ),
+                  //     SizedBox(
+                  //       height: 2,
+                  //     ),
+                  //     Text(
+                  //       tilang[index].pelanggaran,
+                  //       style: TextStyle(
+                  //           fontSize: 15,
+                  //           color: Color.fromARGB(255, 92, 92, 92)),
+                  //     ),
+                  //     Text(
+                  //       tilang[index].filename_pelanggaran,
+                  //       style: TextStyle(
+                  //           fontSize: 15,
+                  //           color: Color.fromARGB(255, 92, 92, 92)),
+                  //     ),
+                  //     Text(
+                  //       tilang[index].akurasi,
+                  //       style: TextStyle(
+                  //           fontSize: 15,
+                  //           color: Color.fromARGB(255, 92, 92, 92)),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             );
           },
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () async {
-      //     Navigator.push(context,
-      //             MaterialPageRoute(builder: (context) => Coba_upload()))
-      //         .then((data) {
-      //       if (data != null) {
-      //         showMessageDialog("Success", "$data Detail Added Success.");
-      //         getRecord();
-      //       }
-      //     });
-      //   },
-      //   child: const Icon(Icons.add),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Coba_upload()))
+              .then((data) {
+            if (data != null) {
+              showMessageDialog("Success", "$data Detail Added Success.");
+              getRecord();
+            }
+          });
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

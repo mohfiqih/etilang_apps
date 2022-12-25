@@ -83,19 +83,13 @@ class _FotoState extends State<Foto> {
               child:
                   image == null ? Text('No Image To Show') : Image.file(image),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              controller: null,
-              decoration: InputDecoration(
-                  labelText: "Nama File",
-                  hintText: "Masukkan Nama File",
-                  border: OutlineInputBorder()), // InputDecoration
-            ),
-            SizedBox(
-              height: 10,
-            ),
+            // TextFormField(
+            //   controller: null,
+            //   decoration: InputDecoration(
+            //       labelText: "Nama File",
+            //       hintText: "Masukkan Nama File",
+            //       border: OutlineInputBorder()), // InputDecoration
+            // ),
             Card(
               elevation: 0,
               color: Color.fromARGB(255, 56, 2, 149),

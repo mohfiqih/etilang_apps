@@ -103,21 +103,15 @@ class _HistoryUsers extends State<HistoryUsers> {
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
                 child: Row(
                   children: <Widget>[
-                    // Image.asset(
-                    //   "assets/calendar.png",
-                    //   height: 50,
-                    // ),
                     SizedBox(
                       width: 17,
+                      height: 10,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(
-                          width: 17,
-                        ),
                         Text(
-                          users[index].email,
+                          "Email : " + users[index].email,
                           style: TextStyle(
                               color: Color.fromARGB(255, 40, 40, 40),
                               fontSize: 19),
@@ -126,12 +120,33 @@ class _HistoryUsers extends State<HistoryUsers> {
                           height: 2,
                         ),
                         Text(
-                          users[index].password,
+                          "Password : " + users[index].password,
                           style: TextStyle(
                               fontSize: 15,
                               color: Color.fromARGB(255, 92, 92, 92)),
                         ),
+                        // Text(
+                        //   "Tanggal : " + users[index].tanggal,
+                        //   style: TextStyle(
+                        //       fontSize: 15,
+                        //       color: Color.fromARGB(255, 92, 92, 92)),
+                        // ),
                       ],
+                    ),
+                    Spacer(),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 255, 77, 77),
+                          borderRadius: BorderRadius.circular(13)),
+                      child: Text(
+                        "Hapus",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ],
                 ),

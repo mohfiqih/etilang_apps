@@ -54,13 +54,13 @@ class Profil extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "E-Tilang Apps",
+                    "Simolang Apps",
                     style: Theme.of(context)
                         .textTheme
                         .headline6
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 50),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -108,9 +108,9 @@ class _ProfileInfoRow extends StatelessWidget {
   const _ProfileInfoRow({Key key}) : super(key: key);
 
   final List<ProfileInfoItem> _items = const [
-    ProfileInfoItem("Posts", 900),
-    ProfileInfoItem("Followers", 120),
-    ProfileInfoItem("Following", 200),
+    ProfileInfoItem("Mobile Application", 80),
+    ProfileInfoItem("Web Application", 80),
+    ProfileInfoItem("Artificial Intelegence", 80),
   ];
 
   @override

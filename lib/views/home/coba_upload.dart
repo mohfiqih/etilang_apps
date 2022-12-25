@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   onUploadImage() async {
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse("http://10.0.2.2/api/tilang"),
+      Uri.parse("http://10.0.2.2:5000/api/tilang"),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
@@ -65,10 +65,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     request.headers.addAll(headers);
     print("request: " + request.toString());
+
     var res = await request.send();
     http.Response response = await http.Response.fromStream(res);
+
     setState(() {
       resJson = jsonDecode(response.body);
+      print(response.body);
     });
   }
 
@@ -77,6 +80,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       selectedImage = File(image.path);
+    });
+  }
+
+  Future fotoKamera() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile imagePicked =
+        await _picker.pickImage(source: ImageSource.camera);
+    // image = File(imagePicked.path);
+    // setState(() {});
+
+    setState(() {
+      selectedImage = File(imagePicked.path);
     });
   }
 
@@ -94,59 +109,118 @@ class _MyHomePageState extends State<MyHomePage> {
                     _drawerKey.currentState.openDrawer();
                   },
                   icon: Icon(Icons.menu, color: AppColors.black)),
-              actions: [
-                AppBarActionItems(),
+              actions: <Widget>[
+                // AppBarActionItems(),
+                IconButton(
+                    color: Colors.black,
+                    icon: Icon(Icons.add_a_photo),
+                    onPressed: () {
+                      fotoKamera();
+                    }),
+                IconButton(
+                    color: Colors.black,
+                    icon: Icon(Icons.add_photo_alternate),
+                    onPressed: () {
+                      // fotoGaleri();
+                      getImage();
+                    }),
               ],
             )
           : PreferredSize(
               preferredSize: Size.zero,
               child: SizedBox(),
             ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            selectedImage == null
-                ? Text(
-                    'Pilih Image terlebih dahulu',
-                  )
-                : Image.file(selectedImage),
-            // RaisedButton(
-            //   color: Colors.green[300],
-            //   onPressed: onUploadImage,
-            //   child: Text(
-            //     "Upload",
-            //     style: TextStyle(color: Colors.white),
-            //   ),
-            // ),
-            TextButton(
-                // iconSize: 25,
-                // padding: EdgeInsets.symmetric(vertical: 20.0),
-                // icon: Icon(
-                //   Icons.upload_file,
-                //   color: Colors.black,
-                // ),
-                onPressed: onUploadImage,
-                style: TextButton.styleFrom(
-                    primary: Colors.white,
-                    backgroundColor: Color.fromARGB(255, 0, 124, 58),
-                    textStyle: const TextStyle(fontSize: 15)),
-                child: const Text('Upload Image')
-                // onPressed: () {
-                //   Navigator.push(context,
-                //       MaterialPageRoute(builder: (context) => Coba_upload()));
-                // },
-                ),
-            // Text(resJson['message'])
-          ],
+      body: Container(
+        margin: new EdgeInsets.all(30.00),
+        child: Center(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                width: 100,
+              ),
+              selectedImage == null
+                  ? Text(
+                      'Pilih image terlebih dahulu',
+                      style: const TextStyle(fontSize: 15),
+                    )
+                  : Image.file(selectedImage),
+              SizedBox(
+                height: 10,
+                // height: 100,
+              ),
+              TextButton(
+                  onPressed: onUploadImage,
+                  style: TextButton.styleFrom(
+                      primary: Color.fromARGB(255, 255, 255, 255),
+                      backgroundColor: Color.fromARGB(255, 56, 2, 149),
+                      textStyle: const TextStyle(fontSize: 16)),
+                  child: const Text('Upload Image')
+                  // onPressed: () {
+                  //   Navigator.push(context,
+                  //       MaterialPageRoute(builder: (context) => Coba_upload()));
+                  // },
+                  ),
+              // Card(
+              //   elevation: 0,
+              //   color: Color.fromARGB(255, 56, 2, 149),
+              //   child: Container(
+              //       height: 50,
+              //       child: InkWell(
+              //         splashColor: Colors.white,
+              //         child: Center(
+              //           child: Text(
+              //             "Tambah Foto",
+              //             style: TextStyle(color: Colors.white),
+              //           ),
+              //         ), // Center
+              //         // onTap: () {},
+              //         onTap: () {
+              //           Navigator.push(
+              //               context,
+              //               MaterialPageRoute(
+              //                   builder: (context) => Coba_upload()));
+              //         },
+              //       )),
+              // ),
+              // Text(
+              //   "Output : $resJson",
+              //   style: const TextStyle(fontSize: 16),
+              // ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Output :",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 40, 40, 40), fontSize: 15),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                "$resJson",
+                style: TextStyle(
+                    fontSize: 15, color: Color.fromARGB(255, 92, 92, 92)),
+              ),
+              // resJson == null
+              //     ? Text(
+              //         'Hasil :',
+              //       )
+              //     : jsonDecode(resJson),
+              // Text(resJson),
+              // Text('Hasil: '),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: getImage,
-        tooltip: 'Increment',
-        backgroundColor: Colors.white,
-        child: Icon(Icons.add_a_photo, color: AppColors.black),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: getImage,
+      //   tooltip: 'Increment',
+      //   backgroundColor: Colors.white,
+      //   child: Icon(Icons.image, color: AppColors.black),
+      // ),
     );
   }
 }
