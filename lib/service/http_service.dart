@@ -12,10 +12,10 @@ import 'package:etilang_apps/dashboard.dart';
 class HttpService {
   static final _client = http.Client();
 
-  static var _loginUrl = Uri.parse('http://10.0.2.2:5000/api/login');
+  static var _loginUrl = Uri.parse('http://192.168.220.106:5000/api/login');
 
   static var _registerUrl =
-      Uri.parse('http://10.0.2.2:5000/api/register');
+      Uri.parse('http://192.168.220.106:5000/api/register');
 
   static flutter_login(email, password, context) async {
     http.Response response = await _client.post(_loginUrl, body: {

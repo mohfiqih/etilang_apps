@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:etilang_apps/component/appBarActionItems.dart';
@@ -48,6 +49,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   File selectedImage;
   var resJson;
+  // var plat;
+  // var pelanggaran;
+  // var tanggal;
 
   onUploadImage() async {
     var request = http.MultipartRequest(
@@ -69,8 +73,16 @@ class _MyHomePageState extends State<MyHomePage> {
     var res = await request.send();
     http.Response response = await http.Response.fromStream(res);
 
-    setState(() {
+    setState(() async {
       resJson = jsonDecode(response.body);
+      // if (resJson[0] == 'Sedang memproses data..') {
+      //   await EasyLoading.showSuccess(resJson[0]);
+      // }
+
+      // plat = resJson['no_plat'];
+      // plat = resJson.no_plat;
+      // pelanggaran = resJson.pelanggaran;
+      // tanggal = resJson.tanggal;
       print(response.body);
     });
   }
@@ -131,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: SizedBox(),
             ),
       body: Container(
-        margin: new EdgeInsets.all(30.00),
+        margin: new EdgeInsets.all(20.00),
         child: Center(
           // mainAxisAlignment: MainAxisAlignment.center,
           child: ListView(
@@ -154,45 +166,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: onUploadImage,
                   style: TextButton.styleFrom(
                       primary: Color.fromARGB(255, 255, 255, 255),
-                      backgroundColor: Color.fromARGB(255, 56, 2, 149),
+                      backgroundColor: Color.fromARGB(255, 77, 163, 255),
                       textStyle: const TextStyle(fontSize: 16)),
-                  child: const Text('Upload Image')
-                  // onPressed: () {
-                  //   Navigator.push(context,
-                  //       MaterialPageRoute(builder: (context) => Coba_upload()));
-                  // },
-                  ),
-              // Card(
-              //   elevation: 0,
-              //   color: Color.fromARGB(255, 56, 2, 149),
-              //   child: Container(
-              //       height: 50,
-              //       child: InkWell(
-              //         splashColor: Colors.white,
-              //         child: Center(
-              //           child: Text(
-              //             "Tambah Foto",
-              //             style: TextStyle(color: Colors.white),
-              //           ),
-              //         ), // Center
-              //         // onTap: () {},
-              //         onTap: () {
-              //           Navigator.push(
-              //               context,
-              //               MaterialPageRoute(
-              //                   builder: (context) => Coba_upload()));
-              //         },
-              //       )),
-              // ),
-              // Text(
-              //   "Output : $resJson",
-              //   style: const TextStyle(fontSize: 16),
-              // ),
+                  child: const Text('Upload Image')),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
               Text(
-                "Output :",
+                "Output Tilang :",
                 style: TextStyle(
                     color: Color.fromARGB(255, 40, 40, 40), fontSize: 15),
               ),
@@ -204,6 +185,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(
                     fontSize: 15, color: Color.fromARGB(255, 92, 92, 92)),
               ),
+              // Text(
+              //   "Pelanggaran" + "$pelanggaran",
+              //   style: TextStyle(
+              //       fontSize: 15, color: Color.fromARGB(255, 92, 92, 92)),
+              // ),
+              // Text(
+              //   "Tanggal : " + "$tanggal",
+              //   style: TextStyle(
+              //       fontSize: 15, color: Color.fromARGB(255, 92, 92, 92)),
+              // ),
               // resJson == null
               //     ? Text(
               //         'Hasil :',

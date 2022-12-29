@@ -126,8 +126,14 @@ class _MyWidgetState extends State<HistoryTilang> {
                             fontSize: 15,
                             color: Color.fromARGB(255, 92, 92, 92)),
                       ),
+                      // Text(
+                      //   "Akurasi : " + tilang[index].akurasi + "%",
+                      //   style: TextStyle(
+                      //       fontSize: 15,
+                      //       color: Color.fromARGB(255, 92, 92, 92)),
+                      // ),
                       Text(
-                        "Akurasi : " + tilang[index].akurasi + "%",
+                        "Tanggal : " + tilang[index].tanggal,
                         style: TextStyle(
                             fontSize: 15,
                             color: Color.fromARGB(255, 92, 92, 92)),
@@ -148,50 +154,6 @@ class _MyWidgetState extends State<HistoryTilang> {
                           fontWeight: FontWeight.w500),
                     ),
                   ),
-                  // Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: <Widget>[
-                  //     SizedBox(
-                  //       width: 17,
-                  //     ),
-                  //     Text(
-                  //       tilang[index].no_plat,
-                  //       style: TextStyle(
-                  //           color: Color.fromARGB(255, 40, 40, 40),
-                  //           fontSize: 19),
-                  //     ),
-                  //     SizedBox(
-                  //       height: 2,
-                  //     ),
-                  //     Text(
-                  //       tilang[index].filename,
-                  //       style: TextStyle(
-                  //           fontSize: 15,
-                  //           color: Color.fromARGB(255, 92, 92, 92)),
-                  //     ),
-                  //     SizedBox(
-                  //       height: 2,
-                  //     ),
-                  //     Text(
-                  //       tilang[index].pelanggaran,
-                  //       style: TextStyle(
-                  //           fontSize: 15,
-                  //           color: Color.fromARGB(255, 92, 92, 92)),
-                  //     ),
-                  //     Text(
-                  //       tilang[index].filename_pelanggaran,
-                  //       style: TextStyle(
-                  //           fontSize: 15,
-                  //           color: Color.fromARGB(255, 92, 92, 92)),
-                  //     ),
-                  //     Text(
-                  //       tilang[index].akurasi,
-                  //       style: TextStyle(
-                  //           fontSize: 15,
-                  //           color: Color.fromARGB(255, 92, 92, 92)),
-                  //     ),
-                  //   ],
-                  // ),
                 ],
               ),
             );
