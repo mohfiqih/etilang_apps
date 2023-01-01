@@ -17,6 +17,8 @@ import 'package:etilang_apps/config/size_config.dart';
 import 'package:etilang_apps/style/colors.dart';
 import 'package:etilang_apps/style/style.dart';
 
+import 'package:etilang_apps/models/tilang.dart';
+
 void main() {
   runApp(MyHomePage());
 }
@@ -49,9 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   File selectedImage;
   var resJson;
-  // var plat;
-  // var pelanggaran;
-  // var tanggal;
 
   onUploadImage() async {
     var request = http.MultipartRequest(
@@ -73,12 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
     var res = await request.send();
     http.Response response = await http.Response.fromStream(res);
 
-    setState(() async {
+    setState(() {
       resJson = jsonDecode(response.body);
-      // if (resJson[0] == 'Sedang memproses data..') {
-      //   await EasyLoading.showSuccess(resJson[0]);
-      // }
-
+      // no_plat = resJson.jsonDecode(response.body);
       // plat = resJson['no_plat'];
       // plat = resJson.no_plat;
       // pelanggaran = resJson.pelanggaran;
@@ -99,8 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final ImagePicker _picker = ImagePicker();
     final XFile imagePicked =
         await _picker.pickImage(source: ImageSource.camera);
-    // image = File(imagePicked.path);
-    // setState(() {});
 
     setState(() {
       selectedImage = File(imagePicked.path);
@@ -144,66 +138,68 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
       body: Container(
         margin: new EdgeInsets.all(20.00),
-        child: Center(
+        child: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
-          child: ListView(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                width: 100,
+          children: <Widget>[
+            SizedBox(
+              width: 100,
+            ),
+            selectedImage == null
+                ? Text(
+                    'Pilih image terlebih dahulu',
+                    style: const TextStyle(fontSize: 15),
+                  )
+                : Image.file(selectedImage),
+            SizedBox(
+              height: 5,
+            ),
+            TextButton(
+              onPressed: onUploadImage,
+              style: TextButton.styleFrom(
+                  primary: Color.fromARGB(255, 255, 255, 255),
+                  backgroundColor: Color.fromARGB(255, 46, 176, 3),
+                  textStyle: const TextStyle(fontSize: 16)),
+              child: const Text('Upload Image'),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            // Text(
+            //   "Output Tilang :",
+            //   style: TextStyle(
+            //     color: Color.fromARGB(255, 40, 40, 40),
+            //     fontSize: 15,
+            //   ),
+            // ),
+            // Text(
+            //   "$resJson",
+            //   style: TextStyle(
+            //       color: Color.fromARGB(255, 40, 40, 40), fontSize: 15),
+            // ),
+            Container(
+              child: SingleChildScrollView(
+                // scrollDirection: Axis.horizontal,
+                child: Container(
+                  width: 550,
+                  height: 540,
+                  child: DataTable(
+                    columns: const <DataColumn>[
+                      DataColumn(label: Text("Nomor Plat")),
+                      DataColumn(label: Text("Pelanggaran")),
+                      DataColumn(label: Text("Tanggal")),
+                    ],
+                    rows: <DataRow>[
+                      DataRow(cells: <DataCell>[
+                        DataCell(Text("")),
+                        DataCell(Text("$resJson")),
+                        DataCell(Text("")),
+                      ]),
+                    ],
+                  ),
+                ),
               ),
-              selectedImage == null
-                  ? Text(
-                      'Pilih image terlebih dahulu',
-                      style: const TextStyle(fontSize: 15),
-                    )
-                  : Image.file(selectedImage),
-              SizedBox(
-                height: 10,
-                // height: 100,
-              ),
-              TextButton(
-                  onPressed: onUploadImage,
-                  style: TextButton.styleFrom(
-                      primary: Color.fromARGB(255, 255, 255, 255),
-                      backgroundColor: Color.fromARGB(255, 77, 163, 255),
-                      textStyle: const TextStyle(fontSize: 16)),
-                  child: const Text('Upload Image')),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Output Tilang :",
-                style: TextStyle(
-                    color: Color.fromARGB(255, 40, 40, 40), fontSize: 15),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                "$resJson",
-                style: TextStyle(
-                    fontSize: 15, color: Color.fromARGB(255, 92, 92, 92)),
-              ),
-              // Text(
-              //   "Pelanggaran" + "$pelanggaran",
-              //   style: TextStyle(
-              //       fontSize: 15, color: Color.fromARGB(255, 92, 92, 92)),
-              // ),
-              // Text(
-              //   "Tanggal : " + "$tanggal",
-              //   style: TextStyle(
-              //       fontSize: 15, color: Color.fromARGB(255, 92, 92, 92)),
-              // ),
-              // resJson == null
-              //     ? Text(
-              //         'Hasil :',
-              //       )
-              //     : jsonDecode(resJson),
-              // Text(resJson),
-              // Text('Hasil: '),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       // floatingActionButton: FloatingActionButton(
