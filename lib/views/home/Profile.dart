@@ -73,6 +73,7 @@ class Profil extends StatelessWidget {
                         },
                         heroTag: 'follow',
                         elevation: 0,
+                        backgroundColor: Color.fromARGB(255, 56, 2, 149),
                         label: const Text("Home"),
                         icon: const Icon(Icons.home_outlined),
                       ),

@@ -12,29 +12,27 @@ import 'package:etilang_apps/dashboard.dart';
 class HttpService {
   static final _client = http.Client();
 
-  static var _loginUrl = Uri.parse('http://192.168.220.106:5000/api/login');
+  static var _loginUrl = Uri.parse('http://192.168.208.106:5000/api/login');
 
   static var _registerUrl =
-      Uri.parse('http://192.168.220.106:5000/api/register');
+      Uri.parse('http://192.168.208.106:5000/api/register');
 
-  static flutter_login(email, password, context) async {
+  static flutter_login(nomor_plat, nomor_bpkb, context) async {
     http.Response response = await _client.post(_loginUrl, body: {
-      "email": email,
-      "password": password,
+      "nomor_plat": nomor_plat,
+      "nomor_bpkb": nomor_bpkb,
     });
 
     if (response.statusCode == 200) {
       print(jsonDecode(response.body));
       var json = jsonDecode(response.body);
 
-      if (json[0] == 'Login Success') {
+      if (json[0] == 'Login Success, Selamat Datang!') {
         await EasyLoading.showSuccess(json[0]);
         await Navigator.push(
             context, MaterialPageRoute(builder: (context) => Dashboard()));
       } else {
-        EasyLoading.showSuccess(json[0]);
-        await Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Dashboard()));
+        EasyLoading.showError(json[0]);
       }
     } else {
       await EasyLoading.showError(
@@ -42,23 +40,30 @@ class HttpService {
     }
   }
 
-  static flutter_register(username, email, password, context) async {
+  static flutter_register(nomor_plat, nomor_bpkb, pemilik, jenis_kendaraan,
+      merk, warna, alamat, email, telp, context) async {
     http.Response response = await _client.post(_registerUrl, body: {
-      "username": username,
+      "nomor_plat": nomor_plat,
+      "nomor_bpkb": nomor_bpkb,
+      "pemilik": pemilik,
+      "jenis_kendaraan": jenis_kendaraan,
+      "merk": merk,
+      "warna": warna,
+      "alamat": alamat,
       "email": email,
-      "password": password,
+      "telp": telp
     });
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
-      if (json[0] == 'Username Already Exist') {
+      if (json[0] == 'Username Sudah Ada, Cek Ulang!') {
         await EasyLoading.showError(json[0]);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => RegisterPage()));
       } else {
         await EasyLoading.showSuccess(json[0]);
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => RegisterPage()));
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
       }
     } else {
       await EasyLoading.showError(

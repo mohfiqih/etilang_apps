@@ -33,8 +33,8 @@ class _ChatBubbleState extends State<ChatBubble> {
   void getChatbotReply(String userReply) async {
     _txtController.clear();
 
-    var response =
-        await http.get(Uri.parse("http://10.0.2.2:5000/get?msg=[$userReply]"));
+    var response = await http
+        .get(Uri.parse("http://192.168.208.106:5000/get?msg=[$userReply]"));
 
     var data = (response.body);
     // print(data);

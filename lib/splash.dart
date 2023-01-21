@@ -37,9 +37,9 @@ class _Splash extends State<Splash> {
       body: Center(
         child: Center(
           child: Image(
-            image: AssetImage('assets/images/MOBILE.gif'),
-            height: 200.0,
-            width: 200.0,
+            image: AssetImage('assets/images/simolang.gif'),
+            height: 290.0,
+            width: 290.0,
           ),
           // child: Icon(
           //   Icons.bike_scooter_outlined,

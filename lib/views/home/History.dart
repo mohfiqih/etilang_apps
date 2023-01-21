@@ -1,4 +1,4 @@
-import 'package:etilang_apps/views/history/history_tilang.dart';
+// import 'package:etilang_apps/views/history/history_tilang.dart';
 import 'package:etilang_apps/views/history/history_users.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +15,7 @@ import 'package:etilang_apps/config/responsive.dart';
 import 'package:etilang_apps/config/size_config.dart';
 import 'package:etilang_apps/style/colors.dart';
 import 'package:etilang_apps/style/style.dart';
+import 'package:etilang_apps/views/history/history.dart';
 
 String selectedCategorie = "Adults";
 
@@ -58,7 +59,7 @@ class _HistoryState extends State<History> {
                 height: 10,
               ),
               Text(
-                "History E-Tilang",
+                "History Simolang",
                 style: TextStyle(
                     color: Colors.black87.withOpacity(0.8),
                     fontSize: 30,
@@ -103,7 +104,7 @@ class _HistoryState extends State<History> {
               SizedBox(
                 height: 25,
               ),
-              Doctorslist(),
+              // Doctorslist(),
             ],
           ),
         ),
@@ -122,7 +123,7 @@ class DoctorsTile extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: Color.fromARGB(255, 157, 206, 255),
+            color: Color.fromARGB(255, 56, 2, 149),
             borderRadius: BorderRadius.circular(20)),
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
         child: Row(
@@ -132,9 +133,9 @@ class DoctorsTile extends StatelessWidget {
             //   height: 50,
             // ),
             Icon(
-              Icons.history,
+              Icons.data_exploration,
               size: 30,
-              color: Color.fromARGB(255, 71, 71, 71),
+              color: Color.fromARGB(255, 255, 255, 255),
             ),
             SizedBox(
               width: 17,
@@ -143,9 +144,9 @@ class DoctorsTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "Data Tilang",
+                  "History Tilang",
                   style: TextStyle(
-                      color: Color.fromARGB(255, 40, 40, 40), fontSize: 19),
+                      color: Color.fromARGB(255, 255, 255, 255), fontSize: 19),
                 ),
                 SizedBox(
                   height: 2,
@@ -153,7 +154,7 @@ class DoctorsTile extends StatelessWidget {
                 Text(
                   "History data tilang",
                   style: TextStyle(
-                      fontSize: 15, color: Color.fromARGB(255, 92, 92, 92)),
+                      fontSize: 15, color: Color.fromARGB(255, 202, 202, 202)),
                 ),
               ],
             ),
@@ -161,7 +162,7 @@ class DoctorsTile extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 9),
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 77, 163, 255),
+                  color: Color.fromARGB(255, 93, 0, 255),
                   borderRadius: BorderRadius.circular(13)),
               child: Text(
                 "Klik",
@@ -188,7 +189,7 @@ class Doctorslist extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: Color.fromARGB(255, 157, 206, 255),
+            color: Color.fromARGB(255, 89, 7, 233),
             borderRadius: BorderRadius.circular(20)),
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
         child: Row(
@@ -198,9 +199,9 @@ class Doctorslist extends StatelessWidget {
             //   height: 50,
             // ),
             Icon(
-              Icons.history,
+              Icons.person_pin_outlined,
               size: 30,
-              color: Color.fromARGB(255, 71, 71, 71),
+              color: Color.fromARGB(255, 255, 255, 255),
             ),
             SizedBox(
               width: 17,
@@ -211,7 +212,7 @@ class Doctorslist extends StatelessWidget {
                 Text(
                   "Data Users",
                   style: TextStyle(
-                      color: Color.fromARGB(255, 40, 40, 40), fontSize: 19),
+                      color: Color.fromARGB(255, 255, 255, 255), fontSize: 19),
                 ),
                 SizedBox(
                   height: 2,
@@ -219,7 +220,7 @@ class Doctorslist extends StatelessWidget {
                 Text(
                   "History data user",
                   style: TextStyle(
-                      fontSize: 15, color: Color.fromARGB(255, 92, 92, 92)),
+                      fontSize: 15, color: Color.fromARGB(255, 217, 217, 217)),
                 ),
               ],
             ),
@@ -227,7 +228,7 @@ class Doctorslist extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 9),
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 77, 163, 255),
+                  color: Color.fromARGB(255, 56, 2, 149),
                   borderRadius: BorderRadius.circular(13)),
               child: Text(
                 "Klik",

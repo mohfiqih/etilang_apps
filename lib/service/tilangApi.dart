@@ -7,7 +7,7 @@ class TilangApi {
   Future<List<Tilang>> getAllTilang() async {
     var client = http.Client();
     //http://127.0.0.1:5000/user
-    var uri = Uri.parse("http://10.0.2.2:5000/api/tilang");
+    var uri = Uri.parse("http://192.168.208.106:5000/api/tilang");
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;

@@ -50,12 +50,16 @@ class _MyHomePageState extends State<MyHomePage> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
   File selectedImage;
-  var resJson;
+  // var resJson;
+
+  var no_plat = "";
+  var pelanggaran = "";
+  var tanggal = "";
 
   onUploadImage() async {
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse("http://10.0.2.2:5000/api/tilang"),
+      Uri.parse("http://192.168.208.106:5000/api/tilang"),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
@@ -66,6 +70,27 @@ class _MyHomePageState extends State<MyHomePage> {
         filename: selectedImage.path.split('/').last,
       ),
     );
+
+    var duration = const Duration(seconds: 2);
+
+    final alert = AlertDialog(
+      title: Text("Notif"),
+      content: Text("Sedang memproses gambar..."),
+      // actions: [
+      //   ElevatedButton(
+      //     child: Text("OK"),
+      //     // onPressed: onUploadImage,
+      //   ),
+      // ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+
     request.headers.addAll(headers);
     print("request: " + request.toString());
 
@@ -73,12 +98,11 @@ class _MyHomePageState extends State<MyHomePage> {
     http.Response response = await http.Response.fromStream(res);
 
     setState(() {
-      resJson = jsonDecode(response.body);
-      // no_plat = resJson.jsonDecode(response.body);
-      // plat = resJson['no_plat'];
-      // plat = resJson.no_plat;
-      // pelanggaran = resJson.pelanggaran;
-      // tanggal = resJson.tanggal;
+      var resJson = jsonDecode(response.body);
+      no_plat = resJson["Nomor Plat"];
+      pelanggaran = resJson["Pelanggaran"];
+      tanggal = resJson["Tanggal"];
+
       print(response.body);
     });
   }
@@ -157,30 +181,19 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: onUploadImage,
               style: TextButton.styleFrom(
                   primary: Color.fromARGB(255, 255, 255, 255),
-                  backgroundColor: Color.fromARGB(255, 46, 176, 3),
+                  backgroundColor: Color.fromARGB(255, 56, 2, 149),
                   textStyle: const TextStyle(fontSize: 16)),
               child: const Text('Upload Image'),
             ),
             SizedBox(
               height: 10,
             ),
-            // Text(
-            //   "Output Tilang :",
-            //   style: TextStyle(
-            //     color: Color.fromARGB(255, 40, 40, 40),
-            //     fontSize: 15,
-            //   ),
-            // ),
-            // Text(
-            //   "$resJson",
-            //   style: TextStyle(
-            //       color: Color.fromARGB(255, 40, 40, 40), fontSize: 15),
-            // ),
             Container(
               child: SingleChildScrollView(
                 // scrollDirection: Axis.horizontal,
+                scrollDirection: Axis.horizontal,
                 child: Container(
-                  width: 550,
+                  width: 440,
                   height: 540,
                   child: DataTable(
                     columns: const <DataColumn>[
@@ -190,9 +203,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                     rows: <DataRow>[
                       DataRow(cells: <DataCell>[
-                        DataCell(Text("")),
-                        DataCell(Text("$resJson")),
-                        DataCell(Text("")),
+                        DataCell(Text(
+                          "$no_plat",
+                          style: TextStyle(fontSize: 12),
+                        )),
+                        // Sidebox(),
+                        DataCell(
+                          Text("$pelanggaran", style: TextStyle(fontSize: 12)),
+                        ),
+                        DataCell(
+                            Text("$tanggal", style: TextStyle(fontSize: 12))),
                       ]),
                     ],
                   ),

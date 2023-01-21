@@ -3,8 +3,10 @@ import 'package:etilang_apps/dashboard.dart';
 import 'package:etilang_apps/style/colors.dart';
 import 'package:etilang_apps/splash.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+// import 'package:flutter_driver/driver_extension.dart';
 
 void main() {
+  // enableFlutterDriverExtension();
   runApp(MyApp());
 }
 

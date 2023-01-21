@@ -8,29 +8,33 @@ String userToJson(List<User> data) =>
 
 class User {
   User({
+    this.username,
     this.email,
     this.id,
     this.password,
   });
 
+  String username;
   String email;
   int id;
   String password;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
+        username: json["username"],
         email: json["email"],
         id: json["id"],
         password: json["password"],
       );
 
   Map<String, dynamic> toJson() => {
+        "username": username,
         "email": email,
         "id": id,
         "password": password,
       };
   @override
   String toString() {
-    String result = password;
+    String result = email;
     return result;
   }
 }

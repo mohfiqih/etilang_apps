@@ -63,8 +63,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Dashboard()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WelcomePage()));
                     },
                     child: Text(
                       'Skip',
@@ -107,12 +109,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               color: Colors.white,
                             ),
                             Text(
-                              'E-Tilang Apps v.1.0',
+                              'Simolang Apps v.1.0',
                               style: kTitleStyle,
                             ),
                             SizedBox(height: 15.0),
                             Text(
-                              'E-Tilang merupakan sistem elektronik tilang, dibuat untuk memonitoring data tilang. Versi pertama ini dibuat untuk pengendara bermotor yang tidak menggunakan helm',
+                              'Simolang merupakan sistem elektronik tilang, dibuat untuk memonitoring data tilang. Versi pertama ini dibuat untuk pengendara bermotor yang tidak menggunakan helm',
                               style: kSubtitleStyle,
                             ),
                           ],
@@ -161,7 +163,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             SizedBox(height: 20.0),
                             Text(
-                              'Get a new experience with E-tilang',
+                              'Get a new experience with Simolang Apps',
                               style: kTitleStyle,
                             ),
                             SizedBox(height: 15.0),
@@ -225,8 +227,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               color: Colors.white,
               child: ElevatedButton(
                 onPressed: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => WelcomePage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => WelcomePage()));
                 },
                 child: Center(
                   child: Padding(
